@@ -5,5 +5,12 @@ import os
 
 @app.route('/drawing/<string:shape>',methods=['GET'])
 def drawingController(shape):
+    command = "ifconfig wlan0 | awk '/inet / {print $2}'"
+    result = sp.run(command, shell=True, stdout=sp.PIPE, stderr=sp.PIPE, text=True)
+    if result.returncode != 0:
+        print("Command failed")
+        print("Error:")
+        print(result.stderr)
 
-    return render_template("Draw.html",shape=shape)
+    data = {"ip":result.stdout[:-1],"shape":shape}
+    return render_template("Draw.html",data=data)

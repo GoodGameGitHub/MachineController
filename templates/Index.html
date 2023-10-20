@@ -16,22 +16,5 @@
 {% endblock content %}
 
 {% block extra_scripts %}
-<script>
-    const uploadForm = document.getElementById('imageUploadForm');
-    const fileInput = document.getElementById('image');
 
-    // Listen for changes in the file input
-    fileInput.addEventListener('change', function () {
-        if (fileInput.files.length > 0) {
-            const formData = new FormData(uploadForm);
-            formData.append('file', fileInput.files[0]);
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/', true);
-            xhr.onload = function () {
-                console.log(xhr.responseText);
-            };
-            xhr.send(formData);
-        }
-    });
-</script>
 {% endblock extra_scripts %}

@@ -1,9 +1,49 @@
 {% extends "Layout.html" %}
 
 {% block content %}
-<div><p>Drawing {{ shape }}!</p></div>
+<div id="LoadingDiv" style="display:grid; grid-template-rows: auto auto;">
+    <div class="centeredItem">
+        <img src="/static/loading3.gif" width="150px">
+    </div>
+    <div class="centeredItem">
+        <p>Dibujo en proceso, por favor espere</p>
+    </div>
+    
+</div>
 {% endblock content %}
 
 {% block extra_scripts %}
+<script>
+    var stopLoop;
+    var controllerData = {{ data | tojson | safe }}
+    console.log(controllerData);
+    var IP = controllerData.ip;
+    function checkStatus(){
+        var responseText;
+        fetch("http://"+IP+"/processing")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('HTTP response not 200');
+            }
+            return response.text();
+        })
+        .then(data => {
+            responseText = data;  
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
 
+        if(responseText === "not_drawing" || stopLoop === true){
+            clearInterval(intervalId);
+            console.log("Toda la demás mierda");
+        }
+        else{
+            console.log("Still drawing");
+        }
+
+    }
+
+    var intervalId = setInterval(checkStatus,500);
+</script>
 {% endblock extra_scripts %}

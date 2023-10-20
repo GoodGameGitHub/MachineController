@@ -6,7 +6,7 @@ body{
 }
 
 .navbar {
-    background-color: white;
+    background-color: black;
     width: 100%;
     height: 90px;
     display: flex;
@@ -37,4 +37,10 @@ body{
     display: grid;
     grid-template-rows: auto 1fr auto; 
     min-height: 100vh;
+}
+
+.centeredItem {
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
