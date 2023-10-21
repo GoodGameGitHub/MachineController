@@ -3,9 +3,9 @@
 {% block content %}
 <div id="LoadingDiv" style="display:grid; grid-template-rows: auto auto;">
     <div class="centeredItem">
-        <img src="/static/loading3.gif" width="150px">
+        <img id="Picture" src="/static/pictures/loading3.gif" width="150px">
     </div>
-    <div class="centeredItem">
+    <div id="Text" class="centeredItem">
         <p>Dibujo en proceso, por favor espere</p>
     </div>
     
@@ -36,7 +36,10 @@
 
         if(responseText === "not_drawing" || stopLoop === true){
             clearInterval(intervalId);
-            console.log("Toda la demás mierda");
+            var imgElement = document.getElementById("Picture");
+            var textElement = document.getElementById("Text");
+            imgElement.setAttribute("src","/static/pictures/check1.png");
+            textElement.innerHTML = "<p>¡Dibujo terminado!</p>";
         }
         else{
             console.log("Still drawing");

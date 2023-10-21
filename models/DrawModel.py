@@ -5,6 +5,11 @@ import os
 
 @app.route('/processing',methods=['GET'])
 def drawing():
-    dp_exists = True
-    return "currently_drawing" if dp_exists else "not_drawing"
+    #if app.config["MACHINE_STAUS"] = 
     
+
+
+@app.route('/changeState',methods=['GET'])
+def switchingState():
+    app.config["DMP_MW"] = "0" if app.config["DMP_MW"] == "1" else "1"
+    return f"changed state to {app.config['DMP_MW']}"

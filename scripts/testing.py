@@ -1,6 +1,14 @@
-import time
+#!/usr/bin/python3
 
-start_time = time.time()
-time.sleep(0.0009)
-end_time = time.time()
-print(start_time,end_time)
+import time
+import os
+import subprocess as sp
+iterations = 15
+
+for i in range(iterations):
+	string = f"iteración: {i}"
+	print(string)
+	sp.run(f"echo {string} >> output.txt",shell=True)
+	time.sleep(2)
+
+print("programa terminado")
